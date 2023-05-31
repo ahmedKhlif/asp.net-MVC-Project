@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Activiter2.props" />
+</Project>

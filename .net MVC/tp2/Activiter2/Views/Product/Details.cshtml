@@ -1,0 +1,47 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@model Activiter2.Models.Product
+@{
+ViewData["Title"] = "Details";
+var photoPath = "~/images/" + (Model.Image ?? "noimage.jpg");
+} 
+
+<div class="container">
+
+    <div class="card shadow-lg p-3 mb-5 bg-body rounded" style="width:100%">
+        @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+        {
+            <a asp-controller="Sales" asp-action="Edit" asp-route-id="@Model?.Id" class="d-flex justify-content-end">
+                <i class="bi bi-pencil-square fs-3 text-dark float-right"></i>
+        </a> }
+        <div class="row d-flex justify-content-center mb-5">
+            <img src="@photoPath" asp-append-version="true" class="card-img-top" style="height:20rem;width:25rem;margin-top:50px">
+        </div>
+        <div class="card-body p-3 mt-3">
+            <div class="row p-3">
+                <div class="col shadow-lg p-3 me-4 bg-body rounded">
+                    <p class="card-text"> <span class="nbtext">Désignation:</span> @Model.Désignation</p>
+                </div>
+                <div class="col shadow-lg p-3 me-4 bg-body rounded">
+                    <p class="card-text"> <span class="nbtext">Price:</span> @Model.Prix</p>
+                </div>
+                <div class="col shadow-lg p-3 me-4 bg-body rounded">
+                    <p class="card-text"> <span class="nbtext">Quantite:</span> @Model.Quantite</p>
+                </div>
+            </div>
+            <div class="row p-3">
+                <div class="shadow-lg p-3 me-4 bg-body rounded">
+                    <p class="card-text"> <span class="nbtext">Description </span>: @Model.Description</p>
+                </div>
+            </div>
+             @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin")) {
+<a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a>  }
+<a asp-action="Index">Back to List</a>
+</div>
+        </div>
+    </div>
+</div>
+
+
+
+
